@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-import afbeeldingen.py as afb
 import numpy as np
 
 def create_data_dictionary(images, positions):
@@ -27,8 +26,7 @@ def create_data_dictionary(images, positions):
     
     modulations = []
     for position in positions:
-      
-      modulations.append(get_modulation(image, position)
+      modulations.append(get_modulation(image, position))
 
     main_dict[get_voltage(image)] = modulations
   
@@ -71,4 +69,4 @@ def get_voltage(image):
   Returns:
     voltage (int): An integer representing the voltage.
   """
-  return None
+  return 5
