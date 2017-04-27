@@ -1,9 +1,21 @@
 #!/usr/bin/env python
 
-from PyQt4 import QtGui
+from tkinter import *
+import sys
 
-class MainWindow(QtGui.QMainWindow):
-  """
-  """
-  def __init__(self):
-    pass
+def run():
+  root = Tk()
+  root.title("microCT image processor")
+  browse_btn_pos = Button(root, text="Browse", command=browse_position)
+  browse_btn_pos.pack(side=LEFT, expand=YES)
+  
+  quit_btn = Button(root, text="Quit", command=quit)
+  quit_btn.pack(side=RIGHT, expand=YES)
+
+  root.mainloop()
+  
+def quit():
+  sys.exit()
+
+def browse_position():
+  pass
