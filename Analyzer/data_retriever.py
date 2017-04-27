@@ -2,7 +2,7 @@
 
 import glob
 
-def retrieve_data(images_map, positon_file, file_names = "normalised_*.tif"):
+def retrieve_data(images_map, positon_file, file_glob = "normalised_*.tif"):
   """
   This functions returns a list of image paths and a list of positions.
   """
@@ -14,7 +14,7 @@ def retrieve_data(images_map, positon_file, file_names = "normalised_*.tif"):
 def retrieve_positions(position_file):
   try:
     position_lines = open(position_file, 'r').readlines()
-    positions = [line.split() for line in position_lines]
+    positions = [float(line.split()) for line in position_lines]
     return positions
 
   except(IOError, e):

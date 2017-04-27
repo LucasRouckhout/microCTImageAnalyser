@@ -4,19 +4,20 @@ import afbeeldingen.py as afb
 import pandas as pd
 import numpy as np
 
-def create_data_frame(images, positions):
+def create_data_dictionary(images, positions):
   
   main_dict = {}
 
   for image in images:
-
+    
     modulations = []
     for position in positions:
+      
       modulations.append(get_modulation(image, position)
 
     main_dict[get_voltage(image)] = modulations
   
-  return pd.DataFrame(main_dict)
+  return main_dict
 
 def get_modulation(image, position, spacing = 10):
   
@@ -42,4 +43,4 @@ def get_voltage(image):
   Returns:
     voltage (int): An integer representing the voltage.
   """
-  pass
+  return None
