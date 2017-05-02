@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import numpy as np
+from processor.afb import afbeeldingen as afb
 
 def create_data_dictionary(images, positions):
   """
