@@ -21,7 +21,7 @@ def create_data_dictionary(images, positions):
     main_dict (dict): The dictionary described in the main body of this docstring.
   """
   main_dict = {}
-
+  
   for image in images:
     
     modulations = []
