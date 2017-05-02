@@ -87,3 +87,9 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# Image files .tif
+*.tif
+
+# xml files
+*.xml
