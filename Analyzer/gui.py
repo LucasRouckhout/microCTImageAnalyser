@@ -85,10 +85,11 @@ class MiddleFrame(Frame):
   def __init__(self, parent = None, **args):
     super().__init__(parent, **args)
     
-    self.progressbar = ttk.Progressbar(self,length=200,mode="indeterminate")
+    self.progressbar = ttk.Progressbar(self,length=200,mode="determinate")
     self.progressbar.pack()
   
-  def start_bar(self):
+  def start_bar(self, max_value=100):
+    self.progressbar.configure(maximum=max_value)
     self.progressbar.start()
 
 
