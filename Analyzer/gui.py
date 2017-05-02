@@ -29,8 +29,6 @@ class MainFrame(Tk):
     self.bottom_frame.pack(side=BOTTOM,expand=YES)
   
   def start(self):
-    # Start the progressbar
-    self.middle_frame.start_bar()
     # Retrieve the filepaths from the entry boxes
     images_map = self.top_frame.image_entry.get()
     position_file = self.top_frame.position_entry.get()
@@ -39,8 +37,11 @@ class MainFrame(Tk):
     # Using the retrieve_data module we gain the images and positions variables
     # needed to run the dagta_processing module.
     images, positions = retr.retrieve_data(images_map, position_file,is_jima=check)
+    
+    # Start the progressbar
+    self.middle_frame.progressbar.start_bar(max_value=len(images))
     # Create the data_dictionary.
-    main_dict = create_data_dictionary(images, positions)
+    main_dict = create_data_dictionary(images, positions, self)
 
 
 class TopFrame(Frame):
@@ -84,7 +85,8 @@ class MiddleFrame(Frame):
   
   def __init__(self, parent = None, **args):
     super().__init__(parent, **args)
-    
+    self.label = Label(self,text="")
+    self.label.pack(side=TOP)
     self.progressbar = ttk.Progressbar(self,length=200,mode="determinate")
     self.progressbar.pack()
   
@@ -92,6 +94,9 @@ class MiddleFrame(Frame):
     self.progressbar.configure(maximum=max_value)
     self.progressbar.start()
 
+  def update_bar(image):
+    self.progressbar.step(1)
+    self.label.configure(text="Finished processing image: {}".format(image))
 
 class BottomFrame(Frame):
   def __init__(self, parent = None, **args):

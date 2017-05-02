@@ -3,7 +3,8 @@
 import numpy as np
 from processor.afb import afbeeldingen as afb
 
-def create_data_dictionary(images, positions):
+def create_data_dictionary(images, positions, main_frame):
+
   """
   This function generates a dictionary using the voltage at which an image is
   taken as keywords. Each keyword is connected to a list containg tuples of 
@@ -22,7 +23,6 @@ def create_data_dictionary(images, positions):
     main_dict (dict): The dictionary described in the main body of this docstring.
   """
   main_dict = {}
-  
   for image in images:
     
     modulations = []
@@ -30,6 +30,7 @@ def create_data_dictionary(images, positions):
       modulations.append(get_modulation(image, position))
 
     main_dict[get_voltage(image)] = modulations
+    main_frame.middle_frame.update_bar(image)
   
   return main_dict
 
