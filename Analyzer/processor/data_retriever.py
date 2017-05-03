@@ -2,11 +2,13 @@
 
 import glob
 
-def retrieve_data(images_map, positon_file,is_jima, file_glob = "normalised_*.tif"):
+def retrieve_data(images_map, position_file,is_jima, file_glob = "normalised_*.tif"):
   """
   This functions returns a list of image paths and a list of positions.
   """
-  images = glob.glob(images_map+file_names)
+  images = glob.glob(images_map+file_glob)
+  if not images:
+    print("Images empty!")
   positions = retrieve_positions(position_file)
   
   return images, positions

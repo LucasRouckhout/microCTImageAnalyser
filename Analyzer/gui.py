@@ -39,10 +39,10 @@ class MainFrame(Tk):
     images, positions = retr.retrieve_data(images_map, position_file,is_jima=check)
     
     # Start the progressbar
-    self.middle_frame.progressbar.start_bar(max_value=len(images))
+    self.middle_frame.start_bar(max_value=len(images))
     # Create the data_dictionary.
-    main_dict = create_data_dictionary(images, positions, self)
-
+    main_dict = proc.create_data_dictionary(images, positions, self)
+    print("Completed!")
 
 class TopFrame(Frame):
   
