@@ -85,18 +85,20 @@ class MiddleFrame(Frame):
   
   def __init__(self, parent = None, **args):
     super().__init__(parent, **args)
-    self.label = Label(self,text="")
-    self.label.pack(side=TOP)
     self.progressbar = ttk.Progressbar(self,length=200,mode="determinate")
     self.progressbar.pack()
-  
+    self.display_text = StringVar()
+    self.display_text.set("Hello!")
+    self.label = Label(self, textvariable=self.display_text)
+    self.label.pack(side=TOP)
+
   def start_bar(self, max_value=100):
     self.progressbar.configure(maximum=max_value)
     self.progressbar.start()
 
   def update_bar(self, image):
     self.progressbar.step(1)
-    self.label.configure(text="Finished processing image: {}".format(image))
+    self.display_text.set('Finished proccesing image: {}'.format(image))
 
 class BottomFrame(Frame):
   def __init__(self, parent = None, **args):
