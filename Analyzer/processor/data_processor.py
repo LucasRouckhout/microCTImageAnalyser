@@ -50,13 +50,13 @@ def get_modulation(image, position, spacing = 10):
   """
   lines = []
   for count in range(5):
-    lines.append(afb.Read_Image(image, position[1], position[2],
-    position[3]+count*spacing))
+    lines.append(afb.Read_Image(image,True,int(position[1]), int(position[2]),
+      int(position[3])+count*spacing))
   
   def modulation(line):
     return (max(line)-min(line))/(max(line)+min(line))
   
-  modulation = map(modulation, lines)
+  modulation = [modulation(line) for line in lines]
   return [np.average(modulation), np.std(modulation)]
 
   

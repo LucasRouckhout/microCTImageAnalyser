@@ -36,8 +36,8 @@ def Read_Image(filename,Selection=False,Lower_X=None,Upper_X=None,Lower_Y=None,U
             High_X = Upper_X
         if Upper_Y!=None:
             High_Y = Upper_Y
-
-        return [float(float(slope)*float(Pixel_Array[Low_Y][i]) + float(offset)) for i in range(Low_X,High_X)]
+        
+        return [float(slope)*float(Pixel_Array[Low_Y][i]) + float(offset[:-2]) for i in range(Low_X,High_X)]
 
 
     out = []
