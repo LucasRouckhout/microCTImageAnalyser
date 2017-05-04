@@ -71,4 +71,4 @@ def get_voltage(image):
   Returns:
     voltage (int): An integer representing the voltage.
   """
-  return 5
+  return int(image[:-3])
