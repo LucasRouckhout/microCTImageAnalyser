@@ -94,7 +94,7 @@ class MiddleFrame(Frame):
     self.progressbar.configure(maximum=max_value)
     self.progressbar.start()
 
-  def update_bar(image):
+  def update_bar(self, image):
     self.progressbar.step(1)
     self.label.configure(text="Finished processing image: {}".format(image))
 
