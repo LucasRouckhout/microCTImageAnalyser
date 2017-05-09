@@ -2,6 +2,7 @@
 
 import numpy as np
 from processor.afb import afbeeldingen as afb
+import random as rnd
 
 def create_data_dictionary(images, positions, main_frame):
 
@@ -77,4 +78,4 @@ def get_voltage(image):
   Returns:
     voltage (int): An integer representing the voltage.
   """
-  return int(image[:-3])
+  return rnd.randrange(0,10)
