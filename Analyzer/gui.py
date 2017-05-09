@@ -52,14 +52,14 @@ class MainFrame(Tk):
 
     def run():
      run = True
-     topframe.destroy
+     topframe.destroy()
 
     def plot():
       plot.plot_modulation_transfer(image, modulation, spatial_freq)
-      topframe.destroy
+      topframe.destroy()
 
     def next_image():
-      topframe.destroy
+      topframe.destroy()
 
     run_btn = Button(topframe, text="Run",command=run)
     run_btn.pack()
@@ -67,6 +67,8 @@ class MainFrame(Tk):
     plot_btn.pack()
     next_btn = Button(topframe, text="Next", command=next_image)
     next_btn.pack()
+    
+    popframe.mainloop()
 
     return run
 
