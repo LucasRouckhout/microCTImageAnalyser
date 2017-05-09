@@ -10,7 +10,8 @@ from processor import data_retriever as retr
 from processor import plot as plot
 
 def run():
-  MainFrame().mainloop()
+  root = MainFrame()
+  root.mainloop()
 
 class MainFrame(Tk):
   
@@ -43,33 +44,35 @@ class MainFrame(Tk):
     # Create the data_dictionary.
     main_dict = proc.create_data_dictionary(images, positions, self)
     
-  def pop_up_plot(image, spatial_freqs, modulations):
+  def pop_up_plot(self,image, spatial_freqs, modulations):
     run = False
-    popframe = Toplevel()
+    topframe = Toplevel()
     
     message = Message(topframe, text="What would you like to do?")
     message.pack(side=TOP)
 
     def run():
-     run = True
-     topframe.destroy()
+      run = True
+      topframe.quit()
+      topframe.destroy()
 
-    def plot():
+    def plot_image():
       plot.plot_modulation_transfer(image, modulation, spatial_freq)
+      topframe.quit()
       topframe.destroy()
 
     def next_image():
+      topframe.quit()
       topframe.destroy()
 
     run_btn = Button(topframe, text="Run",command=run)
     run_btn.pack()
-    plot_btn = Button(topframe, text="Plot", command=plot)
+    plot_btn = Button(topframe, text="Plot", command=plot_image)
     plot_btn.pack()
     next_btn = Button(topframe, text="Next", command=next_image)
     next_btn.pack()
     
-    popframe.mainloop()
-
+    topframe.mainloop()
     return run
 
 class TopFrame(Frame):
