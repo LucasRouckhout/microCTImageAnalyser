@@ -22,7 +22,9 @@ def create_data_dictionary(images, positions, main_frame):
   Returns:
     main_dict (dict): The dictionary described in the main body of this docstring.
   """
+  run = False
   main_dict = {}
+  spatial_freqs = [pos[0] for pos in positions]
   for image in images:
     
     modulations = []
@@ -30,8 +32,12 @@ def create_data_dictionary(images, positions, main_frame):
       modulations.append(get_modulation(image, position))
 
     main_dict[get_voltage(image)] = modulations
+
     main_frame.middle_frame.update_bar(image)
-  
+    # Ask user if he wants to plot the image if run = False.
+    if not run:
+      run = main_frame.pop_up_plot(image, spatial_freqs, modulations)
+
   return main_dict
 
 def get_modulation(image, position, spacing = 10):

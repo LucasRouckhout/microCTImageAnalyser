@@ -42,7 +42,33 @@ class MainFrame(Tk):
     self.middle_frame.start_bar(max_value=len(images))
     # Create the data_dictionary.
     main_dict = proc.create_data_dictionary(images, positions, self)
-    print("Completed!")
+    
+  def pop_up_plot(image, spatial_freqs, modulations):
+    run = False
+    popframe = Toplevel()
+    
+    message = Message(topframe, text="What would you like to do?")
+    message.pack(side=TOP)
+
+    def run():
+     run = True
+     topframe.destroy
+
+    def plot():
+      plot.plot_modulation_transfer(image, modulation, spatial_freq)
+      topframe.destroy
+
+    def next_image():
+      topframe.destroy
+
+    run_btn = Button(topframe, text="Run",command=run)
+    run_btn.pack()
+    plot_btn = Button(topframe, text="Plot", command=plot)
+    plot_btn.pack()
+    next_btn = Button(topframe, text="Next", command=next_image)
+    next_btn.pack()
+
+    return run
 
 class TopFrame(Frame):
   
