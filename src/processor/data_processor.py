@@ -51,7 +51,6 @@ def create_data_dictionary(images, positions, main_frame):
     reply = inp.ask()
     run = execute_user_input(reply, spatial_freqs, modulations, image)
 
-  return main_dict
 
 def get_modulation(image, position, spacing = 10):
   """
