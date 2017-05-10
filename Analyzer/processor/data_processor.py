@@ -3,9 +3,9 @@
 import numpy as np
 from processor.afb import afbeeldingen as afb
 import random as rnd
+from processor.commandline import inp as inp
 
 def create_data_dictionary(images, positions):
-
   """
   This function generates a dictionary using the voltage at which an image is
   taken as keywords. Each keyword is connected to a list containg tuples of 
@@ -23,17 +23,28 @@ def create_data_dictionary(images, positions):
   Returns:
     main_dict (dict): The dictionary described in the main body of this docstring.
   """
+  # Initialise the needed variables.
   run = False
   main_dict = {}
   spatial_freqs = [pos[0] for pos in positions]
+  
+  # Start looping over all the images.
   for image in images:
-    
+
+    # Reset the modulations list.
     modulations = []
+    
+    # Get the modulation for each position on the image.
     for position in positions:
       modulations.append(get_modulation(image, position))
-
+    
+    # Add these modulations to the main dictionary.
     main_dict[get_voltage(image)] = modulations
     
+    # Ask the user for input.
+    reply = inp.ask()
+    
+
   return main_dict
 
 def get_modulation(image, position, spacing = 10):
