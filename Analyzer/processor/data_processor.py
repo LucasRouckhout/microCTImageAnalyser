@@ -4,7 +4,7 @@ import numpy as np
 from processor.afb import afbeeldingen as afb
 import random as rnd
 
-def create_data_dictionary(images, positions, main_frame):
+def create_data_dictionary(images, positions):
 
   """
   This function generates a dictionary using the voltage at which an image is

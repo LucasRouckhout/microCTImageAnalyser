@@ -39,7 +39,7 @@ class MainFrame(Tk):
     images, positions = retr.retrieve_data(images_map, position_file)
     
     # Create the data_dictionary.
-    main_dict = proc.create_data_dictionary(images, positions, self)
+    main_dict = proc.create_data_dictionary(images, positions)
     
 
 class TopFrame(Frame):
