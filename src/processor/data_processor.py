@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
 import numpy as np
-from processor.afb import afbeeldingen as afb
+from modules import afbeeldingen as afb
 import random as rnd
-from processor.commandline import inp as inp
+from modules import inp as inp
 
 def create_data_dictionary(images, positions):
   """

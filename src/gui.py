@@ -4,10 +4,9 @@ from tkinter import ttk
 from tkinter import *
 from tkinter import filedialog
 import sys
-import processor
 from processor import data_processor as proc
 from processor import data_retriever as retr
-from processor import plot as plot
+from modules import plot as plot
 
 def run():
   root = MainFrame()
