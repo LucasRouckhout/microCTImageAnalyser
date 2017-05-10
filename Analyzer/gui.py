@@ -33,47 +33,14 @@ class MainFrame(Tk):
     # Retrieve the filepaths from the entry boxes
     images_map = self.top_frame.image_entry.get()
     position_file = self.top_frame.position_entry.get()
-    # Check.get() returns 0 if the checkbox is off and 1 if on.
-    check = self.top_frame.check.get()
+
     # Using the retrieve_data module we gain the images and positions variables
     # needed to run the dagta_processing module.
-    images, positions = retr.retrieve_data(images_map, position_file,is_jima=check)
+    images, positions = retr.retrieve_data(images_map, position_file)
     
-    # Start the progressbar
-    self.middle_frame.start_bar(max_value=len(images))
     # Create the data_dictionary.
     main_dict = proc.create_data_dictionary(images, positions, self)
     
-  def pop_up_plot(self,image, spatial_freqs, modulations):
-    run = False
-    topframe = Toplevel()
-    
-    message = Message(topframe, text="What would you like to do?")
-    message.pack(side=TOP)
-
-    def run():
-      run = True
-      topframe.quit()
-      topframe.destroy()
-
-    def plot_image():
-      plot.plot_modulation_transfer(image, modulation, spatial_freq)
-      topframe.quit()
-      topframe.destroy()
-
-    def next_image():
-      topframe.quit()
-      topframe.destroy()
-
-    run_btn = Button(topframe, text="Run",command=run)
-    run_btn.pack()
-    plot_btn = Button(topframe, text="Plot", command=plot_image)
-    plot_btn.pack()
-    next_btn = Button(topframe, text="Next", command=next_image)
-    next_btn.pack()
-    
-    topframe.mainloop()
-    return run
 
 class TopFrame(Frame):
   

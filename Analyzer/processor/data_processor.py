@@ -33,14 +33,7 @@ def create_data_dictionary(images, positions, main_frame):
       modulations.append(get_modulation(image, position))
 
     main_dict[get_voltage(image)] = modulations
-
-    main_frame.middle_frame.update_bar(image)
     
-    # Ask user if he wants to plot the image if run = False.
-    if not run:
-      run = main_frame.pop_up_plot(image, spatial_freqs, modulations)
-    
-    print("end of for loop :: There are {} images".format(len(images)))
   return main_dict
 
 def get_modulation(image, position, spacing = 10):
