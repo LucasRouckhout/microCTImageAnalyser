@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import sys
 import numpy as np
 from modules import afbeeldingen as afb
 import random as rnd
@@ -21,9 +22,6 @@ def create_data_dictionary(images, positions, main_frame):
     positions (list): A list of lists formatted in a specific way which contains
       all the information on the positions and the spatial frequency at these 
       positions. See help(get_modulations()) for specifics on the used format.
-
-  Returns:
-    main_dict (dict): The dictionary described in the main body of this docstring.
   """
   # First close the gui.
   main_frame.destroy()
@@ -45,12 +43,20 @@ def create_data_dictionary(images, positions, main_frame):
     # Add these modulations to the main dictionary.
     main_dict[get_voltage(image)] = modulations
     
-    # Ask the user for input.
-    print(":: Processed image {}\n:: What would you like to"\
-    " do?".format(os.path.basename(image)))
-    reply = inp.ask()
-    run = execute_user_input(reply, spatial_freqs, modulations, image)
+    # Ask the user for input if run is False.
+    if not run:
+      print(":: Processed image {}\n:: What would you like to"\
+      " do?".format(os.path.basename(image)))
+      reply = inp.ask()
+      run = execute_user_input(reply, spatial_freqs, modulations, image)
+    else:
+      print(":: Processed image {}".format(os.path.basename(image)))
 
+  # When the loop is done with all the images ask what to do with the
+  # main_dict.
+  print(":: Processed all the images!\n:: Finalize or quit?")
+  reply = inp.ask()
+  finalize(main_dict)
 
 def get_modulation(image, position, spacing = 10):
   """
@@ -112,3 +118,8 @@ def execute_user_input(reply, spatial_freqs, modulations, image):
   else:
     print(":: Processing next image...")
     return False
+
+def finalize(main_dict):
+  
+  print(":: Completed! If you see this we still need to implement finalize()")
+  sys.exit()
