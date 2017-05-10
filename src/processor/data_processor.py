@@ -4,6 +4,8 @@ import numpy as np
 from modules import afbeeldingen as afb
 import random as rnd
 from modules import inp as inp
+from modules import plot as plot
+import os
 
 def create_data_dictionary(images, positions):
   """
@@ -42,8 +44,10 @@ def create_data_dictionary(images, positions):
     main_dict[get_voltage(image)] = modulations
     
     # Ask the user for input.
+    print(":: Processed image {}\n:: What would you like to"\
+    " do?".format(os.path.basename(image)))
     reply = inp.ask()
-    
+    run = execute_user_input(reply, spatial_freqs, modulations, image)
 
   return main_dict
 
@@ -85,3 +89,25 @@ def get_voltage(image):
     voltage (int): An integer representing the voltage.
   """
   return rnd.randrange(0,10)
+
+def execute_user_input(reply, spatial_freqs, modulations, image):
+  """
+  This function controls the execution of commandline inputs from the user. 
+  It returns the boolean value for the run variable.
+
+  Args:
+    reply (str): A string containing the command from the user
+    spatial_freqs (list):
+  """
+  if reply == 'p':
+    plot.plot_modulation_transfer(image, modulations, spatial_freqs)    
+    print(":: Processing next image...")
+    return False
+    
+  elif reply == "r":
+    print(":: Processing next image...")
+    return True
+
+  else:
+    print(":: Processing next image...")
+    return False
