@@ -7,7 +7,7 @@ from modules import inp as inp
 from modules import plot as plot
 import os
 
-def create_data_dictionary(images, positions):
+def create_data_dictionary(images, positions, main_frame):
   """
   This function generates a dictionary using the voltage at which an image is
   taken as keywords. Each keyword is connected to a list containg tuples of 
@@ -25,6 +25,8 @@ def create_data_dictionary(images, positions):
   Returns:
     main_dict (dict): The dictionary described in the main body of this docstring.
   """
+  # First close the gui.
+  main_frame.destroy()
   # Initialise the needed variables.
   run = False
   main_dict = {}

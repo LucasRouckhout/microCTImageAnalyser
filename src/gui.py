@@ -16,14 +16,11 @@ class MainFrame(Tk):
   
   def __init__(self):
     super().__init__()
-    self.title("microCT image processor")
-    self.minsize(width=400, height=450)
+    self.title("microCTImageAnalyzer")
+    self.minsize(width=350, height=200)
 
     self.top_frame = TopFrame(self)
     self.top_frame.pack(side=TOP,expand=YES)
-
-    self.middle_frame = MiddleFrame(self)
-    self.middle_frame.pack(expand=YES)
 
     self.bottom_frame = BottomFrame(self)
     self.bottom_frame.pack(side=BOTTOM,expand=YES)
@@ -38,7 +35,7 @@ class MainFrame(Tk):
     images, positions = retr.retrieve_data(images_map, position_file)
     
     # Create the data_dictionary.
-    main_dict = proc.create_data_dictionary(images, positions)
+    main_dict = proc.create_data_dictionary(images, positions, self)
     
 
 class TopFrame(Frame):
