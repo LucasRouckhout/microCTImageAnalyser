@@ -95,7 +95,9 @@ def get_voltage(image):
   Returns:
     voltage (int): An integer representing the voltage.
   """
-  return rnd.randrange(0,10)
+  name = os.path.basename(image)
+
+  return int(name[:2])
 
 def execute_user_input(reply, spatial_freqs, modulations, image):
   """
