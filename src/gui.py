@@ -17,7 +17,7 @@ class MainFrame(Tk):
   def __init__(self):
     super().__init__()
     self.title("microCTImageAnalyzer")
-    self.minsize(width=350, height=200)
+    self.minsize(width=400, height=200)
 
     self.top_frame = TopFrame(self)
     self.top_frame.pack(side=TOP,expand=YES)
@@ -45,9 +45,6 @@ class TopFrame(Frame):
     
     self.check = IntVar()
 
-    jima_check = Checkbutton(self, text="Using JIMA pattern", variable=self.check)
-    jima_check.pack(side=BOTTOM)
-    
     left_frame = Frame(self)
     left_frame.pack(side=LEFT)
     
