@@ -47,6 +47,8 @@ def create_data_dictionary(images, positions, main_frame):
 		if not run:
 			print(":: Processed image {}\n:: What would you like to"\
 					" do?".format(os.path.basename(image)))
+			print(":: Debugging >> Frequencies = {} >> Modulations ="
+			"{}".format(spatial_freqs, modulations))
 			reply = inp.ask()
 			run = execute_user_input(reply, spatial_freqs, modulations, image)
 		else:
@@ -96,8 +98,8 @@ def get_voltage(image):
 		voltage (int): An integer representing the voltage.
 	"""
 	name = os.path.basename(image)
-
-	return int(name[:2])
+	name_reduced = name[11:][:-6]
+	return int(name_reduced[:2])
 
 def execute_user_input(reply, spatial_freqs, modulations, image):
 	"""
