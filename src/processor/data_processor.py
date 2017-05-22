@@ -19,7 +19,7 @@ def create_data_dictionary(images, positions, main_frame):
 	Args:
 		images (list of str): A list of strings representing the path to the image
 			files.
-		positions (list): A list of lists formatted in a specific way which contains
+		positions (list of lists of strings): A list of lists formatted in a specific way which contains
 			all the information on the positions and the spatial frequency at these 
 			positions. See help(get_modulations()) for specifics on the used format.
 	"""
@@ -28,29 +28,29 @@ def create_data_dictionary(images, positions, main_frame):
 	# Initialise the needed variables.
 	run = False
 	main_dict = {}
-	spatial_freqs = [pos[0] for pos in positions]
+	spatial_freqs = [float(pos[0]) for pos in positions]
 
 	# Start looping over all the images.
 	for image in images:
 
-	# Reset the modulations list.
-	modulations = []
+		# Reset the modulations list.
+		modulations = []
 
-	# Get the modulation for each position on the image.
-	for position in positions:
-		modulations.append(get_modulation(image, position))
+		# Get the modulation for each position on the image.
+		for position in positions:
+			modulations.append(get_modulation(image, position))
 
-	# Add these modulations to the main dictionary.
-	main_dict[get_voltage(image)] = modulations
+		# Add these modulations to the main dictionary.
+		main_dict[get_voltage(image)] = modulations
 
-	# Ask the user for input if run is False.
-	if not run:
-		print(":: Processed image {}\n:: What would you like to"\
-				" do?".format(os.path.basename(image)))
-		reply = inp.ask()
-		run = execute_user_input(reply, spatial_freqs, modulations, image)
-	else:
-		print(":: Processed image {}".format(os.path.basename(image)))
+		# Ask the user for input if run is False.
+		if not run:
+			print(":: Processed image {}\n:: What would you like to"\
+					" do?".format(os.path.basename(image)))
+			reply = inp.ask()
+			run = execute_user_input(reply, spatial_freqs, modulations, image)
+		else:
+			print(":: Processed image {}".format(os.path.basename(image)))
 
 	# When the loop is done with all the images ask what to do with the
 	# main_dict.
