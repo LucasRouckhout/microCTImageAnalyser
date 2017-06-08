@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#/usr/bin/env python3
 
 import sys
 import numpy as np
@@ -40,15 +40,14 @@ def create_data_dictionary(images, positions, main_frame):
 		for position in positions:
 			modulations.append(get_modulation(image, position))
 
-		# Add these modulations to the main dictionary.
+		# Add these (normalized) modulations to the main dictionary.
+		modulations = normalize(modulations)
 		main_dict[get_voltage(image)] = modulations
 
 		# Ask the user for input if run is False.
 		if not run:
 			print(":: Processed image {}\n:: What would you like to"\
 					" do?".format(os.path.basename(image)))
-			print(":: Debugging >> Frequencies = {} >> Modulations ="
-			"{}".format(spatial_freqs, modulations))
 			reply = inp.ask()
 			run = execute_user_input(reply, spatial_freqs, modulations, image)
 		else:
@@ -59,6 +58,10 @@ def create_data_dictionary(images, positions, main_frame):
 	print(":: Processed all the images!\n:: Finalize or quit?")
 	reply = inp.ask()
 	finalize(main_dict)
+
+def normalize(data):
+
+	return [[(i[0]-min(data[0]))/(max(data[0]) - min(data[0])), i[1]] for i in data]
 
 def get_modulation(image, position, spacing = 10):
 	"""
@@ -104,7 +107,7 @@ def get_voltage(image):
 def execute_user_input(reply, spatial_freqs, modulations, image):
 	"""
 	This function controls the execution of commandline inputs from the user. 
-	It returns the boolean value for the run variable.
+	It also returns the boolean value for the run variable.
 
 	Args:
 		reply (str): A string containing the command from the user
