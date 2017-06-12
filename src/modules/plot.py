@@ -33,19 +33,10 @@ def fit(x,y,y_err,model):
 	"""
 	This function uses a scipy method to fit the parameters to the given x,y data.
 	"""
-	fitted_output = curve_fit(model,x,y,p0=4,sigma=y_err)
+	fitted_output = curve_fit(model,x,y,sigma=y_err)
 	a,b = fitted_output[0]
-	a_covariance = fitted_output[1]
-	return a,b,a_covariance
+	covariance = fitted_output[1]
+	return a,b,covariance
 
 def model(x,a,b):
-	# SOD and SDD in µm
-	source_object_dist = 15.819*1000
-	source_detector_dist = 1067.1*1000
-
-	d_2 = source_detector_dist - source_object_dist
-	d_1 = source_object_dist
-
-	r = d_2/d_1
-
-	return ((np.sin(np.pi*x*a*r))/(np.pi*x*a*r))+b
+	return b*np.exp(-(x**2)/(2*a**2))
