@@ -25,8 +25,8 @@ def plot_modulation_transfer(image, modulations, spatial_freqs):
 	fit_data = [model(x,a,b) for x in special_freqs]
 
 	# Plot and show.
-	plt.plot(special_freqs,fit_data)
-	plt.errorbar(spatial_freqs, y,fmt='s', yerr = y_err)
+	plt.plot(spatial_freqs, y,'co',special_freqs,fit_data)
+	plt.text(1,1, 'Focal spotsize = {}'.format(a))
 	plt.show()
 
 def fit(x,y,y_err,model):
