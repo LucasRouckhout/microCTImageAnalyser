@@ -59,9 +59,17 @@ def create_data_dictionary(images, positions, main_frame):
 	reply = inp.ask()
 	finalize(main_dict)
 
-def normalize(data):
+def normalize(data_points):
+	modulations = [point[0] for point in data_points]
+	stds = [point[1] for point in data_points]
 
-	return [[(i[0]-min(data[0]))/(max(data[0]) - min(data[0])), i[1]] for i in data]
+	normalized_modulations = [(value - min(modulations))/(max(modulations) - min(modulations)) for value in modulations]
+	
+	return_data = []
+	for i in range(len(modulations)):
+		return_data.append([normalized_modulations[i], stds[i]])
+	
+	return return_data
 
 def get_modulation(image, position, spacing = 10):
 	"""
