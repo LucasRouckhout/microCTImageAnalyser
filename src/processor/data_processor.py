@@ -1,5 +1,6 @@
 #/usr/bin/env python3
 
+import re
 import sys
 import numpy as np
 from modules import afbeeldingen as afb
@@ -55,9 +56,7 @@ def create_data_dictionary(images, positions, main_frame):
 
 	# When the loop is done with all the images ask what to do with the
 	# main_dict.
-	print(":: Processed all the images!\n:: Finalize or quit?")
-	reply = inp.ask()
-	finalize(main_dict)
+	finalize(main_dict, spatial_freqs)
 
 def normalize(data_points):
 	modulations = [point[0] for point in data_points]
@@ -108,10 +107,13 @@ def get_voltage(image):
 	Returns:
 		voltage (int): An integer representing the voltage.
 	"""
+	"""
 	name = os.path.basename(image)
 	name_reduced = name[11:][:-6]
 	return int(name_reduced[:2])
-
+	"""
+	res = re.search('(?i)\d{2,3}kV',image)
+	return int(res.group(0)[:-2])
 def execute_user_input(reply, spatial_freqs, modulations, image):
 	"""
 	This function controls the execution of commandline inputs from the user. 
@@ -134,9 +136,11 @@ def execute_user_input(reply, spatial_freqs, modulations, image):
 		print(":: Processing next image...")
 		return False
 
-def finalize(main_dict):
-
-	print(":: Completed! If you see this we still need to implement finalize()")
-
-
+def finalize(main_dict,spatial_freqs):	
+	
+	print(":: Processed all the images!\n:: What was the power setting for these images?")
+	reply = inp.ask()
+	power = int(reply)
+	plot.plot_data_dict(main_dict, spatial_freqs, power)			
+	print(":: Finished!")
 
