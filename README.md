@@ -1,2 +1,2 @@
 # microCTImageAnalyser
-Application for analyzing the image quality of micro-CT images. 
+Script for calculating the focal spot sizes of a micro-CT setup. 
