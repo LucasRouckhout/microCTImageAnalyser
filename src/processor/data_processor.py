@@ -141,6 +141,7 @@ def finalize(main_dict,spatial_freqs):
 	print(":: Processed all the images!\n:: What was the power setting for these images?")
 	reply = inp.ask()
 	power = int(reply)
+	
 	plot.plot_data_dict(main_dict, spatial_freqs, power)			
 	print(":: Finished!")
 
